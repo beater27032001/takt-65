@@ -43,9 +43,13 @@ export function useKeyboard() {
   useEffect(() => {
     const onDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement
-      if (target.closest('button, input, textarea, a') && e.code !== 'Space')
+      // campos de texto ficam com o teclado; num botão focado, Espaço e Enter acionam o botão
+      if (target.closest('input, textarea, [contenteditable]')) return
+      if (
+        target.closest('button, a') &&
+        (e.code === 'Space' || e.code === 'Enter')
+      )
         return
-      if (target.closest('button, a') && e.code === 'Space') return
       if (e.metaKey || e.ctrlKey) return
       const key = KEYS.get(e.code)
       if (!key) return
