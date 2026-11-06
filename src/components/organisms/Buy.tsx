@@ -39,7 +39,7 @@ export function Buy() {
     <section className="border-t border-line py-20 md:py-24">
       <div className="wrap flex flex-wrap items-end justify-between gap-6">
         <div ref={ref}>
-          <p className="m-0 font-mono text-xs tracking-[.12em] text-muted uppercase">
+          <p className="m-0 mb-3 font-mono text-xs tracking-[.12em] text-muted uppercase">
             Sua configuração
           </p>
           <motion.div
