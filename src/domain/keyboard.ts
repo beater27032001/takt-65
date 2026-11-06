@@ -23,7 +23,7 @@ export const ROWS: Key[][] = [
     ...[...'1234567890'].map((d) => k(`Digit${d}`, d)),
     k('Minus', '-'),
     k('Equal', '='),
-    k('Backspace', '⌫', 2, 'mod'),
+    k('Backspace', 'Back', 2, 'mod'),
     k('Delete', 'Del', 1, 'mod'),
   ],
   [
