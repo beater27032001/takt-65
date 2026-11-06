@@ -1,4 +1,5 @@
 import { Hero } from '@organisms/Hero'
+import { Layers } from '@organisms/Layers'
 import { Nav } from '@organisms/Nav'
 import { Switches } from '@organisms/Switches'
 import { ConfigProvider } from '@providers/ConfigProvider'
@@ -13,6 +14,7 @@ export default function Home() {
           <Hero />
         </div>
         <Switches />
+        <Layers />
       </ConfigProvider>
     </MotionProvider>
   )

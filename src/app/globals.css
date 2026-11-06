@@ -155,3 +155,37 @@
     opacity: 0;
   }
 }
+
+/* Camadas em 3D: --gap separa todas de uma vez; a camada em foco sobe mais um pouco */
+@layer components {
+  @media (width >= 48rem) {
+    .layers-stage {
+      --open: 56px !important;
+    }
+  }
+  .layer {
+    position: absolute;
+    inset-inline: 8%;
+    top: 34%;
+    height: 90px;
+    border-radius: 12px;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08);
+    transform-style: preserve-3d;
+    transform: rotateX(60deg) rotateZ(-30deg)
+      translateZ(calc(var(--i) * var(--gap) + var(--lift, 0px)));
+    transition:
+      box-shadow 0.3s,
+      background-color 0.4s;
+  }
+  @media (width >= 48rem) {
+    .layer {
+      height: 120px;
+    }
+  }
+  .layer.is-focus {
+    --lift: 28px;
+    box-shadow:
+      0 0 0 2px var(--accent),
+      0 18px 30px -12px rgb(0 0 0 / 0.4);
+  }
+}
