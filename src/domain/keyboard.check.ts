@@ -2,6 +2,8 @@
 import assert from 'node:assert/strict'
 
 import {
+  BOARD_WIDTH,
+  layoutKeys,
   columns,
   curvePoints,
   KEY_COUNT,
@@ -74,4 +76,18 @@ assert.equal(x(0), 34)
 assert.equal(x(4), 270)
 assert.equal(y(0), 126)
 assert.equal(y(80), 10)
+const placed = layoutKeys()
+assert.equal(placed.length, 68)
+assert.equal(placed[0].x, -7.5, 'Esc no canto esquerdo')
+const last = placed.at(-1)!
+assert.equal(
+  last.x + last.key.width / 2,
+  BOARD_WIDTH / 2,
+  'a seta direita fecha a borda direita',
+)
+assert.equal(
+  placed.find((p) => p.key.code === 'Space')!.z,
+  2,
+  'espaço na fileira da frente',
+)
 console.log('keyboard ok')

@@ -405,3 +405,35 @@ export const SPECS: [string, string][] = [
 ]
 
 export const PRICE = 1290
+
+/** Largura e profundidade do teclado em unidades de tecla (1u). */
+export const BOARD_WIDTH = 16
+export const BOARD_DEPTH = ROWS.length
+
+export interface PlacedKey {
+  key: Key
+  row: number
+  /** centro da tecla em unidades, com o teclado centrado na origem */
+  x: number
+  z: number
+  /** posição na diagonal, para a cascata de entrada */
+  wave: number
+}
+
+/** Onde fica cada tecla: x da esquerda para a direita, z de trás (números) para a frente. */
+export function layoutKeys(): PlacedKey[] {
+  return ROWS.flatMap((row, r) => {
+    let left = 0
+    return row.map((key) => {
+      const placed = {
+        key,
+        row: r,
+        x: left + key.width / 2 - BOARD_WIDTH / 2,
+        z: r + 0.5 - BOARD_DEPTH / 2,
+        wave: r + left / 4,
+      }
+      left += key.width
+      return placed
+    })
+  })
+}
