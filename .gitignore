@@ -6,3 +6,5 @@ next-env.d.ts
 .DS_Store
 *.tmp.ts
 .shots
+.vercel
+.env*
