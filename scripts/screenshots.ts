@@ -16,6 +16,11 @@ const typeAndPick = (colorway: string, text: string) => async (page: Page) => {
   await page.click(`[aria-label="${colorway}"]`)
   await page.keyboard.type(text, { delay: 40 })
   await page.keyboard.down('KeyK')
+  // enquadra o teclado e os controles juntos
+  await page.evaluate(() => {
+    const canvas = document.querySelector('canvas')!
+    window.scrollTo(0, canvas.getBoundingClientRect().top + window.scrollY - 24)
+  })
   await page.waitForTimeout(150)
 }
 const section = (i: number) => (page: Page) =>
@@ -85,19 +90,23 @@ await new Promise((resolve, reject) => {
   server.stdout.on('data', (d) => String(d).includes('Ready') && resolve(null))
   server.on('exit', (code) => reject(new Error(`next start saiu com ${code}`)))
 })
-const browser = await chromium.launch()
+// WebGL por software, para funcionar sem GPU
+const browser = await chromium.launch({
+  args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+})
 const errors: string[] = []
 
 for (const shot of SHOTS) {
   const context = await browser.newContext({
     viewport: { width: shot.width, height: shot.height },
-    deviceScaleFactor: 2,
+    // página inteira com WebGL por software: em 2× a captura passa do limite
+    deviceScaleFactor: shot.full ? 1 : 2,
     colorScheme: shot.scheme,
   })
   const page = await context.newPage()
   page.on('pageerror', (e) => errors.push(`${shot.name}: ${e.message}`))
   await page.goto('http://localhost:4173/', { waitUntil: 'networkidle' })
-  await page.waitForTimeout(2200)
+  await page.waitForTimeout(3500)
   if (shot.setup) {
     await shot.setup(page)
     await page.waitForTimeout(1500)
