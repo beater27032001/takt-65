@@ -1,6 +1,6 @@
 # TAKT 65
 
-Página de produto de um teclado mecânico fictício. O teclado é o herói e é jogável: clique nas teclas ou digite no seu teclado e ouça o som do switch escolhido, sintetizado na hora, sem arquivos de áudio. Troque a cor e o switch e veja a configuração mudar até o carrinho.
+Página de produto de um teclado mecânico fictício. O teclado é o herói, em 3D, e é jogável: clique nas teclas ou digite no seu teclado e ouça o som do switch escolhido, sintetizado na hora, sem arquivos de áudio. Troque a cor e o switch e veja a configuração mudar até o carrinho.
 
 ![Desktop, tema claro](docs/desktop.png)
 
@@ -20,7 +20,7 @@ Página de produto de um teclado mecânico fictício. O teclado é o herói e é
 
 ## O que dá pra fazer
 
-- **Teclado 65% jogável**: 68 teclas com o mouse, o toque ou o teclado físico; cada tecla afunda e soa
+- **Teclado 65% em 3D e jogável**: keycaps PBT com perfil esculpido por fileira (como as Cherry), laterais afuniladas e legendas impressas, case de alumínio anodizado chanfrado com inclinação de digitação, luz de estúdio e sombra. As 68 teclas respondem ao mouse, ao toque e ao teclado físico: cada uma afunda e soa. Sem WebGL, entra uma versão em CSS
 - **Três switches com som próprio**: linear (grave e liso), tátil (com o degrau) e clicky (com o clique agudo); teclas largas soam mais graves, como no teclado de verdade
 - **Quatro cores** (Grafite, Menta, Sinal e Glacial) aplicadas às teclas, ao case e às camadas
 - **Tela de teste** com o que você digitou e a contagem de teclas
@@ -31,16 +31,17 @@ Página de produto de um teclado mecânico fictício. O teclado é o herói e é
 
 ## Tecnologias
 
-| Tecnologia                                                                   | Uso                                                |
-| ---------------------------------------------------------------------------- | -------------------------------------------------- |
-| [Next.js 16](https://nextjs.org) (App Router)                                | framework, renderização estática e fontes          |
-| [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org) | interface e tipagem                                |
-| Web Audio API                                                                | som das teclas sintetizado (ruído filtrado + tom)  |
-| [Motion](https://motion.dev)                                                 | inclinação com mola, camadas 3D, curvas e entradas |
-| [Tailwind CSS 4](https://tailwindcss.com)                                    | estilos, temas e layout responsivo                 |
-| [Lucide](https://lucide.dev)                                                 | ícones                                             |
-| [Playwright](https://playwright.dev)                                         | geração dos prints deste README                    |
-| ESLint + Prettier                                                            | padrão de código e formatação                      |
+| Tecnologia                                                                                                          | Uso                                                |
+| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [Next.js 16](https://nextjs.org) (App Router)                                                                       | framework, renderização estática e fontes          |
+| [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)                                        | interface e tipagem                                |
+| [React Three Fiber](https://r3f.docs.pmnd.rs) + [three.js](https://threejs.org) + [drei](https://drei.docs.pmnd.rs) | teclado em 3D, carregado só no navegador           |
+| Web Audio API                                                                                                       | som das teclas sintetizado (ruído filtrado + tom)  |
+| [Motion](https://motion.dev)                                                                                        | inclinação com mola, camadas 3D, curvas e entradas |
+| [Tailwind CSS 4](https://tailwindcss.com)                                                                           | estilos, temas e layout responsivo                 |
+| [Lucide](https://lucide.dev)                                                                                        | ícones                                             |
+| [Playwright](https://playwright.dev)                                                                                | geração dos prints deste README                    |
+| ESLint + Prettier                                                                                                   | padrão de código e formatação                      |
 
 ## Como rodar
 
@@ -77,7 +78,8 @@ src/
 ├── hooks/useKeyboard.ts   teclas abaixadas, texto e teclado físico
 ├── components/
 │   ├── atoms/             Keycap
-│   ├── molecules/         Keyboard, Controls, ForceCurve, SectionTitle
+│   ├── molecules/         Keyboard3D (cena, geometria das teclas e legendas), KeyboardCss (reserva),
+│   │                      Controls, ForceCurve, SectionTitle
 │   └── organisms/         Nav, Hero, Switches, Layers, Specs, Buy, Footer
 ├── lib/                   utilitário cn
 └── constants/             curvas de animação
