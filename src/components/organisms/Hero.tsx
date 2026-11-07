@@ -5,7 +5,7 @@ import { motion } from 'motion/react'
 import { EASE } from '@constants/motion'
 import { useKeyboard } from '@hooks/useKeyboard'
 import { Controls } from '@molecules/Controls'
-import { Keyboard } from '@molecules/Keyboard'
+import { Keyboard } from '@molecules/Keyboard3D'
 
 export function Hero() {
   const kb = useKeyboard()

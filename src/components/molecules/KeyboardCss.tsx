@@ -8,7 +8,7 @@ import type { KeyboardState } from '@hooks/useKeyboard'
 
 const TILT = { stiffness: 140, damping: 18 }
 
-export function Keyboard({ kb }: { kb: KeyboardState }) {
+export function KeyboardCss({ kb }: { kb: KeyboardState }) {
   const reduced = useReducedMotion()
   const tiltX = useSpring(0, TILT)
   const tiltY = useSpring(0, TILT)
